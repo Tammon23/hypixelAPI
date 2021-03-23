@@ -10,10 +10,16 @@ class Player:
         self.api_key = api_key
         self.url = "https://api.hypixel.net/player"
         self.cached_data = None
+        self.cached_uuid = None
 
-    def get_player_data(self, uuid, cache_results=False):
+    def isDataAlreadyCached(self, uuid):
+        """ Returns if data is already cached for user """
+        return self.cached_data is not None and self.cached_uuid == uuid, "No cached results for user available"
+
+    def get_player_data(self, uuid, cache_results=False, return_result_if_cached=False):
         """
-        Gets all the data of a user
+        Gets all the data of a user, optionally can cache the results and not return the results
+        caching results overwrites already cached attributes
         :param cache_results:
         :param uuid:
         :return:
@@ -23,9 +29,13 @@ class Player:
         r = json.loads(r.content)
         if r['success']:
             if cache_results:
+                self.cached_uuid = uuid
                 self.cached_data = r['player']
+                if not return_result_if_cached:
+                    return None
             return r['player']
         return None
+
 
     def get_player_name(self, uuid, get_from_cache=False):
         """
@@ -51,7 +61,12 @@ class Player:
         :return:
         """
         if get_from_cache:
-            data = self.cached_data
+            state, msg = self.isDataAlreadyCached(uuid)
+            if state:
+                data = self.cached_data
+            else:
+                print(msg)
+                return
         else:
             data = self.get_player_data(uuid)
 
@@ -67,7 +82,12 @@ class Player:
         :return:
         """
         if get_from_cache:
-            data = self.cached_data
+            state, msg = self.isDataAlreadyCached(uuid)
+            if state:
+                data = self.cached_data
+            else:
+                print(msg)
+                return
         else:
             data = self.get_player_data(uuid)
 
@@ -83,7 +103,12 @@ class Player:
         :return:
         """
         if get_from_cache:
-            data = self.cached_data
+            state, msg = self.isDataAlreadyCached(uuid)
+            if state:
+                data = self.cached_data
+            else:
+                print(msg)
+                return
         else:
             data = self.get_player_data(uuid)
 
@@ -99,7 +124,12 @@ class Player:
         :return:
         """
         if get_from_cache:
-            data = self.cached_data
+            state, msg = self.isDataAlreadyCached(uuid)
+            if state:
+                data = self.cached_data
+            else:
+                print(msg)
+                return
         else:
             data = self.get_player_data(uuid)
 
@@ -115,7 +145,12 @@ class Player:
         :return:
         """
         if get_from_cache:
-            data = self.cached_data
+            state, msg = self.isDataAlreadyCached(uuid)
+            if state:
+                data = self.cached_data
+            else:
+                print(msg)
+                return
         else:
             data = self.get_player_data(uuid)
 
@@ -131,7 +166,12 @@ class Player:
         :return:
         """
         if get_from_cache:
-            data = self.cached_data
+            state, msg = self.isDataAlreadyCached(uuid)
+            if state:
+                data = self.cached_data
+            else:
+                print(msg)
+                return
         else:
             data = self.get_player_data(uuid)
 
@@ -147,7 +187,12 @@ class Player:
         :return:
         """
         if get_from_cache:
-            data = self.cached_data
+            state, msg = self.isDataAlreadyCached(uuid)
+            if state:
+                data = self.cached_data
+            else:
+                print(msg)
+                return
         else:
             data = self.get_player_data(uuid)
 
@@ -164,7 +209,12 @@ class Player:
         :return:
         """
         if get_from_cache:
-            data = self.cached_data
+            state, msg = self.isDataAlreadyCached(uuid)
+            if state:
+                data = self.cached_data
+            else:
+                print(msg)
+                return
         else:
             data = self.get_player_data(uuid)
 
@@ -182,7 +232,12 @@ class Player:
         :return:
         """
         if get_from_cache:
-            data = self.cached_data
+            state, msg = self.isDataAlreadyCached(uuid)
+            if state:
+                data = self.cached_data
+            else:
+                print(msg)
+                return
         else:
             data = self.get_player_data(uuid)
 
@@ -199,7 +254,12 @@ class Player:
         :return:
         """
         if get_from_cache:
-            data = self.cached_data
+            state, msg = self.isDataAlreadyCached(uuid)
+            if state:
+                data = self.cached_data
+            else:
+                print(msg)
+                return
         else:
             data = self.get_player_data(uuid)
 
@@ -217,7 +277,12 @@ class Player:
         :return:
         """
         if get_from_cache:
-            data = self.cached_data
+            state, msg = self.isDataAlreadyCached(uuid)
+            if state:
+                data = self.cached_data
+            else:
+                print(msg)
+                return
         else:
             data = self.get_player_data(uuid)
 
@@ -233,7 +298,12 @@ class Player:
         :return:
         """
         if get_from_cache:
-            data = self.cached_data
+            state, msg = self.isDataAlreadyCached(uuid)
+            if state:
+                data = self.cached_data
+            else:
+                print(msg)
+                return
         else:
             data = self.get_player_data(uuid)
 
@@ -249,7 +319,12 @@ class Player:
         :return:
         """
         if get_from_cache:
-            data = self.cached_data
+            state, msg = self.isDataAlreadyCached(uuid)
+            if state:
+                data = self.cached_data
+            else:
+                print(msg)
+                return
         else:
             data = self.get_player_data(uuid)
 
@@ -265,7 +340,12 @@ class Player:
         :return:
         """
         if get_from_cache:
-            data = self.cached_data
+            state, msg = self.isDataAlreadyCached(uuid)
+            if state:
+                data = self.cached_data
+            else:
+                print(msg)
+                return
         else:
             data = self.get_player_data(uuid)
 
@@ -281,7 +361,12 @@ class Player:
         :return:
         """
         if get_from_cache:
-            data = self.cached_data
+            state, msg = self.isDataAlreadyCached(uuid)
+            if state:
+                data = self.cached_data
+            else:
+                print(msg)
+                return
         else:
             data = self.get_player_data(uuid)
 
@@ -297,7 +382,12 @@ class Player:
         :return:
         """
         if get_from_cache:
-            data = self.cached_data
+            state, msg = self.isDataAlreadyCached(uuid)
+            if state:
+                data = self.cached_data
+            else:
+                print(msg)
+                return
         else:
             data = self.get_player_data(uuid)
 
@@ -313,7 +403,12 @@ class Player:
         :return:
         """
         if get_from_cache:
-            data = self.cached_data
+            state, msg = self.isDataAlreadyCached(uuid)
+            if state:
+                data = self.cached_data
+            else:
+                print(msg)
+                return
         else:
             data = self.get_player_data(uuid)
 
@@ -329,7 +424,12 @@ class Player:
         :return:
         """
         if get_from_cache:
-            data = self.cached_data
+            state, msg = self.isDataAlreadyCached(uuid)
+            if state:
+                data = self.cached_data
+            else:
+                print(msg)
+                return
         else:
             data = self.get_player_data(uuid)
 
@@ -345,7 +445,12 @@ class Player:
         :return:
         """
         if get_from_cache:
-            data = self.cached_data
+            state, msg = self.isDataAlreadyCached(uuid)
+            if state:
+                data = self.cached_data
+            else:
+                print(msg)
+                return
         else:
             data = self.get_player_data(uuid)
 
@@ -361,7 +466,12 @@ class Player:
         :return:
         """
         if get_from_cache:
-            data = self.cached_data
+            state, msg = self.isDataAlreadyCached(uuid)
+            if state:
+                data = self.cached_data
+            else:
+                print(msg)
+                return
         else:
             data = self.get_player_data(uuid)
 
@@ -377,7 +487,12 @@ class Player:
         :return:
         """
         if get_from_cache:
-            data = self.cached_data
+            state, msg = self.isDataAlreadyCached(uuid)
+            if state:
+                data = self.cached_data
+            else:
+                print(msg)
+                return
         else:
             data = self.get_player_data(uuid)
 
@@ -393,7 +508,12 @@ class Player:
         :return:
         """
         if get_from_cache:
-            data = self.cached_data
+            state, msg = self.isDataAlreadyCached(uuid)
+            if state:
+                data = self.cached_data
+            else:
+                print(msg)
+                return
         else:
             data = self.get_player_data(uuid)
 
@@ -409,7 +529,12 @@ class Player:
         :return:
         """
         if get_from_cache:
-            data = self.cached_data
+            state, msg = self.isDataAlreadyCached(uuid)
+            if state:
+                data = self.cached_data
+            else:
+                print(msg)
+                return
         else:
             data = self.get_player_data(uuid)
 
@@ -425,7 +550,12 @@ class Player:
         :return:
         """
         if get_from_cache:
-            data = self.cached_data
+            state, msg = self.isDataAlreadyCached(uuid)
+            if state:
+                data = self.cached_data
+            else:
+                print(msg)
+                return
         else:
             data = self.get_player_data(uuid)
 
@@ -441,7 +571,12 @@ class Player:
         :return:
         """
         if get_from_cache:
-            data = self.cached_data
+            state, msg = self.isDataAlreadyCached(uuid)
+            if state:
+                data = self.cached_data
+            else:
+                print(msg)
+                return
         else:
             data = self.get_player_data(uuid)
 
@@ -457,7 +592,12 @@ class Player:
         :return:
         """
         if get_from_cache:
-            data = self.cached_data
+            state, msg = self.isDataAlreadyCached(uuid)
+            if state:
+                data = self.cached_data
+            else:
+                print(msg)
+                return
         else:
             data = self.get_player_data(uuid)
 
@@ -473,7 +613,12 @@ class Player:
         :return:
         """
         if get_from_cache:
-            data = self.cached_data
+            state, msg = self.isDataAlreadyCached(uuid)
+            if state:
+                data = self.cached_data
+            else:
+                print(msg)
+                return
         else:
             data = self.get_player_data(uuid)
 
@@ -489,7 +634,12 @@ class Player:
         :return:
         """
         if get_from_cache:
-            data = self.cached_data
+            state, msg = self.isDataAlreadyCached(uuid)
+            if state:
+                data = self.cached_data
+            else:
+                print(msg)
+                return
         else:
             data = self.get_player_data(uuid)
 
@@ -505,7 +655,12 @@ class Player:
         :return:
         """
         if get_from_cache:
-            data = self.cached_data
+            state, msg = self.isDataAlreadyCached(uuid)
+            if state:
+                data = self.cached_data
+            else:
+                print(msg)
+                return
         else:
             data = self.get_player_data(uuid)
 
@@ -521,7 +676,12 @@ class Player:
         :return:
         """
         if get_from_cache:
-            data = self.cached_data
+            state, msg = self.isDataAlreadyCached(uuid)
+            if state:
+                data = self.cached_data
+            else:
+                print(msg)
+                return
         else:
             data = self.get_player_data(uuid)
 
@@ -537,7 +697,12 @@ class Player:
         :return:
         """
         if get_from_cache:
-            data = self.cached_data
+            state, msg = self.isDataAlreadyCached(uuid)
+            if state:
+                data = self.cached_data
+            else:
+                print(msg)
+                return
         else:
             data = self.get_player_data(uuid)
 
@@ -553,7 +718,12 @@ class Player:
         :return:
         """
         if get_from_cache:
-            data = self.cached_data
+            state, msg = self.isDataAlreadyCached(uuid)
+            if state:
+                data = self.cached_data
+            else:
+                print(msg)
+                return
         else:
             data = self.get_player_data(uuid)
 
@@ -569,7 +739,12 @@ class Player:
         :return:
         """
         if get_from_cache:
-            data = self.cached_data
+            state, msg = self.isDataAlreadyCached(uuid)
+            if state:
+                data = self.cached_data
+            else:
+                print(msg)
+                return
         else:
             data = self.get_player_data(uuid)
 
@@ -585,7 +760,12 @@ class Player:
         :return:
         """
         if get_from_cache:
-            data = self.cached_data
+            state, msg = self.isDataAlreadyCached(uuid)
+            if state:
+                data = self.cached_data
+            else:
+                print(msg)
+                return
         else:
             data = self.get_player_data(uuid)
 
@@ -601,7 +781,12 @@ class Player:
         :return:
         """
         if get_from_cache:
-            data = self.cached_data
+            state, msg = self.isDataAlreadyCached(uuid)
+            if state:
+                data = self.cached_data
+            else:
+                print(msg)
+                return
         else:
             data = self.get_player_data(uuid)
 
@@ -617,7 +802,12 @@ class Player:
         :return:
         """
         if get_from_cache:
-            data = self.cached_data
+            state, msg = self.isDataAlreadyCached(uuid)
+            if state:
+                data = self.cached_data
+            else:
+                print(msg)
+                return
         else:
             data = self.get_player_data(uuid)
 
@@ -633,7 +823,12 @@ class Player:
         :return:
         """
         if get_from_cache:
-            data = self.cached_data
+            state, msg = self.isDataAlreadyCached(uuid)
+            if state:
+                data = self.cached_data
+            else:
+                print(msg)
+                return
         else:
             data = self.get_player_data(uuid)
 
@@ -649,7 +844,12 @@ class Player:
         :return:
         """
         if get_from_cache:
-            data = self.cached_data
+            state, msg = self.isDataAlreadyCached(uuid)
+            if state:
+                data = self.cached_data
+            else:
+                print(msg)
+                return
         else:
             data = self.get_player_data(uuid)
 
@@ -665,7 +865,12 @@ class Player:
         :return:
         """
         if get_from_cache:
-            data = self.cached_data
+            state, msg = self.isDataAlreadyCached(uuid)
+            if state:
+                data = self.cached_data
+            else:
+                print(msg)
+                return
         else:
             data = self.get_player_data(uuid)
 
@@ -681,7 +886,12 @@ class Player:
         :return:
         """
         if get_from_cache:
-            data = self.cached_data
+            state, msg = self.isDataAlreadyCached(uuid)
+            if state:
+                data = self.cached_data
+            else:
+                print(msg)
+                return
         else:
             data = self.get_player_data(uuid)
 
@@ -697,7 +907,12 @@ class Player:
         :return:
         """
         if get_from_cache:
-            data = self.cached_data
+            state, msg = self.isDataAlreadyCached(uuid)
+            if state:
+                data = self.cached_data
+            else:
+                print(msg)
+                return
         else:
             data = self.get_player_data(uuid)
 
@@ -713,7 +928,12 @@ class Player:
         :return:
         """
         if get_from_cache:
-            data = self.cached_data
+            state, msg = self.isDataAlreadyCached(uuid)
+            if state:
+                data = self.cached_data
+            else:
+                print(msg)
+                return
         else:
             data = self.get_player_data(uuid)
 
@@ -729,7 +949,12 @@ class Player:
         :return:
         """
         if get_from_cache:
-            data = self.cached_data
+            state, msg = self.isDataAlreadyCached(uuid)
+            if state:
+                data = self.cached_data
+            else:
+                print(msg)
+                return
         else:
             data = self.get_player_data(uuid)
 
@@ -745,7 +970,12 @@ class Player:
         :return:
         """
         if get_from_cache:
-            data = self.cached_data
+            state, msg = self.isDataAlreadyCached(uuid)
+            if state:
+                data = self.cached_data
+            else:
+                print(msg)
+                return
         else:
             data = self.get_player_data(uuid)
 
@@ -761,7 +991,12 @@ class Player:
         :return:
         """
         if get_from_cache:
-            data = self.cached_data
+            state, msg = self.isDataAlreadyCached(uuid)
+            if state:
+                data = self.cached_data
+            else:
+                print(msg)
+                return
         else:
             data = self.get_player_data(uuid)
 
@@ -777,7 +1012,12 @@ class Player:
         :return:
         """
         if get_from_cache:
-            data = self.cached_data
+            state, msg = self.isDataAlreadyCached(uuid)
+            if state:
+                data = self.cached_data
+            else:
+                print(msg)
+                return
         else:
             data = self.get_player_data(uuid)
 
@@ -793,7 +1033,12 @@ class Player:
         :return:
         """
         if get_from_cache:
-            data = self.cached_data
+            state, msg = self.isDataAlreadyCached(uuid)
+            if state:
+                data = self.cached_data
+            else:
+                print(msg)
+                return
         else:
             data = self.get_player_data(uuid)
 
@@ -809,7 +1054,12 @@ class Player:
         :return:
         """
         if get_from_cache:
-            data = self.cached_data
+            state, msg = self.isDataAlreadyCached(uuid)
+            if state:
+                data = self.cached_data
+            else:
+                print(msg)
+                return
         else:
             data = self.get_player_data(uuid)
 
@@ -825,7 +1075,12 @@ class Player:
         :return:
         """
         if get_from_cache:
-            data = self.cached_data
+            state, msg = self.isDataAlreadyCached(uuid)
+            if state:
+                data = self.cached_data
+            else:
+                print(msg)
+                return
         else:
             data = self.get_player_data(uuid)
 
@@ -841,7 +1096,12 @@ class Player:
         :return:
         """
         if get_from_cache:
-            data = self.cached_data
+            state, msg = self.isDataAlreadyCached(uuid)
+            if state:
+                data = self.cached_data
+            else:
+                print(msg)
+                return
         else:
             data = self.get_player_data(uuid)
 
@@ -857,7 +1117,12 @@ class Player:
         :return:
         """
         if get_from_cache:
-            data = self.cached_data
+            state, msg = self.isDataAlreadyCached(uuid)
+            if state:
+                data = self.cached_data
+            else:
+                print(msg)
+                return
         else:
             data = self.get_player_data(uuid)
 
@@ -873,7 +1138,12 @@ class Player:
         :return:
         """
         if get_from_cache:
-            data = self.cached_data
+            state, msg = self.isDataAlreadyCached(uuid)
+            if state:
+                data = self.cached_data
+            else:
+                print(msg)
+                return
         else:
             data = self.get_player_data(uuid)
 
@@ -889,7 +1159,12 @@ class Player:
         :return:
         """
         if get_from_cache:
-            data = self.cached_data
+            state, msg = self.isDataAlreadyCached(uuid)
+            if state:
+                data = self.cached_data
+            else:
+                print(msg)
+                return
         else:
             data = self.get_player_data(uuid)
 
@@ -905,7 +1180,12 @@ class Player:
         :return:
         """
         if get_from_cache:
-            data = self.cached_data
+            state, msg = self.isDataAlreadyCached(uuid)
+            if state:
+                data = self.cached_data
+            else:
+                print(msg)
+                return
         else:
             data = self.get_player_data(uuid)
 
@@ -921,7 +1201,12 @@ class Player:
         :return:
         """
         if get_from_cache:
-            data = self.cached_data
+            state, msg = self.isDataAlreadyCached(uuid)
+            if state:
+                data = self.cached_data
+            else:
+                print(msg)
+                return
         else:
             data = self.get_player_data(uuid)
 
@@ -937,7 +1222,12 @@ class Player:
         :return:
         """
         if get_from_cache:
-            data = self.cached_data
+            state, msg = self.isDataAlreadyCached(uuid)
+            if state:
+                data = self.cached_data
+            else:
+                print(msg)
+                return
         else:
             data = self.get_player_data(uuid)
 
@@ -953,7 +1243,12 @@ class Player:
         :return:
         """
         if get_from_cache:
-            data = self.cached_data
+            state, msg = self.isDataAlreadyCached(uuid)
+            if state:
+                data = self.cached_data
+            else:
+                print(msg)
+                return
         else:
             data = self.get_player_data(uuid)
 
@@ -969,7 +1264,12 @@ class Player:
         :return:
         """
         if get_from_cache:
-            data = self.cached_data
+            state, msg = self.isDataAlreadyCached(uuid)
+            if state:
+                data = self.cached_data
+            else:
+                print(msg)
+                return
         else:
             data = self.get_player_data(uuid)
 
@@ -985,7 +1285,12 @@ class Player:
         :return:
         """
         if get_from_cache:
-            data = self.cached_data
+            state, msg = self.isDataAlreadyCached(uuid)
+            if state:
+                data = self.cached_data
+            else:
+                print(msg)
+                return
         else:
             data = self.get_player_data(uuid)
 
@@ -1001,7 +1306,12 @@ class Player:
         :return:
         """
         if get_from_cache:
-            data = self.cached_data
+            state, msg = self.isDataAlreadyCached(uuid)
+            if state:
+                data = self.cached_data
+            else:
+                print(msg)
+                return
         else:
             data = self.get_player_data(uuid)
 
@@ -1017,7 +1327,12 @@ class Player:
         :return:
         """
         if get_from_cache:
-            data = self.cached_data
+            state, msg = self.isDataAlreadyCached(uuid)
+            if state:
+                data = self.cached_data
+            else:
+                print(msg)
+                return
         else:
             data = self.get_player_data(uuid)
 
@@ -1033,7 +1348,12 @@ class Player:
         :return:
         """
         if get_from_cache:
-            data = self.cached_data
+            state, msg = self.isDataAlreadyCached(uuid)
+            if state:
+                data = self.cached_data
+            else:
+                print(msg)
+                return
         else:
             data = self.get_player_data(uuid)
 
@@ -1049,7 +1369,12 @@ class Player:
         :return:
         """
         if get_from_cache:
-            data = self.cached_data
+            state, msg = self.isDataAlreadyCached(uuid)
+            if state:
+                data = self.cached_data
+            else:
+                print(msg)
+                return
         else:
             data = self.get_player_data(uuid)
 
@@ -1065,7 +1390,12 @@ class Player:
         :return:
         """
         if get_from_cache:
-            data = self.cached_data
+            state, msg = self.isDataAlreadyCached(uuid)
+            if state:
+                data = self.cached_data
+            else:
+                print(msg)
+                return
         else:
             data = self.get_player_data(uuid)
 
@@ -1081,7 +1411,12 @@ class Player:
         :return:
         """
         if get_from_cache:
-            data = self.cached_data
+            state, msg = self.isDataAlreadyCached(uuid)
+            if state:
+                data = self.cached_data
+            else:
+                print(msg)
+                return
         else:
             data = self.get_player_data(uuid)
 
@@ -1097,7 +1432,12 @@ class Player:
         :return:
         """
         if get_from_cache:
-            data = self.cached_data
+            state, msg = self.isDataAlreadyCached(uuid)
+            if state:
+                data = self.cached_data
+            else:
+                print(msg)
+                return
         else:
             data = self.get_player_data(uuid)
 
@@ -1114,7 +1454,12 @@ class Player:
         :return:
         """
         if get_from_cache:
-            data = self.cached_data
+            state, msg = self.isDataAlreadyCached(uuid)
+            if state:
+                data = self.cached_data
+            else:
+                print(msg)
+                return
         else:
             data = self.get_player_data(uuid)
 
@@ -1131,7 +1476,12 @@ class Player:
         :return:
         """
         if get_from_cache:
-            data = self.cached_data
+            state, msg = self.isDataAlreadyCached(uuid)
+            if state:
+                data = self.cached_data
+            else:
+                print(msg)
+                return
         else:
             data = self.get_player_data(uuid)
 
@@ -1147,7 +1497,12 @@ class Player:
         :return:
         """
         if get_from_cache:
-            data = self.cached_data
+            state, msg = self.isDataAlreadyCached(uuid)
+            if state:
+                data = self.cached_data
+            else:
+                print(msg)
+                return
         else:
             data = self.get_player_data(uuid)
 
@@ -1163,7 +1518,12 @@ class Player:
         :return:
         """
         if get_from_cache:
-            data = self.cached_data
+            state, msg = self.isDataAlreadyCached(uuid)
+            if state:
+                data = self.cached_data
+            else:
+                print(msg)
+                return
         else:
             data = self.get_player_data(uuid)
 
@@ -1179,7 +1539,12 @@ class Player:
         :return:
         """
         if get_from_cache:
-            data = self.cached_data
+            state, msg = self.isDataAlreadyCached(uuid)
+            if state:
+                data = self.cached_data
+            else:
+                print(msg)
+                return
         else:
             data = self.get_player_data(uuid)
 
@@ -1195,7 +1560,12 @@ class Player:
         :return:
         """
         if get_from_cache:
-            data = self.cached_data
+            state, msg = self.isDataAlreadyCached(uuid)
+            if state:
+                data = self.cached_data
+            else:
+                print(msg)
+                return
         else:
             data = self.get_player_data(uuid)
 
@@ -1212,7 +1582,12 @@ class Player:
         :return:
         """
         if get_from_cache:
-            data = self.cached_data
+            state, msg = self.isDataAlreadyCached(uuid)
+            if state:
+                data = self.cached_data
+            else:
+                print(msg)
+                return
         else:
             data = self.get_player_data(uuid)
 
@@ -1226,4 +1601,14 @@ if __name__ == '__main__':
     apikey = ""
     UUID = username_to_uuid("Tammon")
     h = Player(apikey)
-    print(h.get_outfit(UUID))
+
+    # what happens if you call from cache but nothing is cached
+    print(h.get_outfit(UUID, get_from_cache=True))
+    print()
+
+    # caching
+    h.get_player_data(UUID, cache_results=True, return_result_if_cached=False)
+
+    # example function usage
+    print(h.get_achievementPoints(UUID, get_from_cache=True))
+    print(h.get_networkExp(UUID, get_from_cache=True))
