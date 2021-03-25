@@ -71,6 +71,7 @@ class Resources:
     def get_guild_permissions(self, uuid, cache_results=False, return_result_if_cached=False, get_from_cache=False):
         return self.get_template("guilds/permissions", uuid, cache_results, return_result_if_cached, get_from_cache)
 
+
 if __name__ == "__main__":
     h = Resources(apikey)
     UUID = username_to_uuid("Tammon")
