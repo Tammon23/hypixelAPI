@@ -6,13 +6,13 @@ class SkyBlock:
     def __init__(self, api_key):
         self.api_key = api_key
         self.url = "https://api.hypixel.net/"
-        self.cached_data = None
+        self.cached_data = {}
         self.cached_uuid = None
         self.cached_type = None
 
     def isDataAlreadyCached(self, uuid, _type):
         """ Returns if data is already cached for user """
-        return self.cached_data is not None and self.cached_uuid == uuid and self.cached_type == _type, "No cached results for user available"
+        return self.cached_uuid == uuid and _type in self.cached_data, "No cached results for user available"
 
     def get_template(self, _type, method_key=None, cache_results=False, return_result_if_cached=False, get_from_cache=False, method="uuid"):
         """
@@ -32,7 +32,7 @@ class SkyBlock:
             if self.isDataAlreadyCached(method_key, _type):
 
                 # if so, we return that data
-                return self.cached_data
+                return self.cached_data[_type]
             else:
                 return None
 
@@ -48,8 +48,7 @@ class SkyBlock:
             del results['success']
             if cache_results:
                 self.cached_uuid = method_key
-                self.cached_data = results
-                self.cached_type = _type
+                self.cached_data[_type] = results
                 if not return_result_if_cached:
                     return None
             return results
@@ -92,10 +91,10 @@ class SkyBlock:
         if get_from_cache:
 
             # we check if what is there is cached data for achievements
-            if self.isDataAlreadyCached(page, "skyblock/auctions"):
+            if self.isDataAlreadyCached(page, "skyblock/auctions" + str(page)):
 
                 # if so, we return that data
-                return self.cached_data
+                return self.cached_data["skyblock/auctions" + str(page)]
             else:
                 return None
 
@@ -111,8 +110,7 @@ class SkyBlock:
             del results['success']
             if cache_results:
                 self.cached_uuid = page
-                self.cached_data = results
-                self.cached_type = "skyblock/auctions"
+                self.cached_data["skyblock/auctions" + str(page)] = results
                 if not return_result_if_cached:
                     return None
             return results
@@ -146,4 +144,4 @@ class SkyBlock:
 
 if __name__ == "__main__":
     h = SkyBlock(apikey)
-    print(h.get_bazaar().keys())
+    print(h.get_auctions(1).keys())
