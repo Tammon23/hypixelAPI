@@ -1,6 +1,6 @@
-from HypixelAPIWrapper.HelperFunctions import *
+from HypixelAPIWrapper.Util.Exceptions import InvalidAPIKeyError
+from HypixelAPIWrapper.Util.HelperFunctions import *
 import requests
-import json
 
 
 class Player:
@@ -20,13 +20,16 @@ class Player:
         """
         Gets all the data of a user, optionally can cache the results and not return the results
         caching results overwrites already cached attributes
+        :param return_result_if_cached:
         :param cache_results:
         :param uuid:
         :return:
         """
+        if not is_api_key_valid(self.api_key):
+            raise InvalidAPIKeyError
+
         params = {"uuid": uuid, "key": self.api_key}
-        r = requests.get(self.url, params=params)
-        r = json.loads(r.content)
+        r = requests.get(self.url, params=params).json()
         if r['success']:
             if cache_results:
                 self.cached_uuid = uuid
@@ -35,7 +38,6 @@ class Player:
                     return None
             return r['player']
         return None
-
 
     def get_player_name(self, uuid, get_from_cache=False):
         """

@@ -1,6 +1,5 @@
-from HypixelAPIWrapper.HelperFunctions import *
+from HypixelAPIWrapper.Util.HelperFunctions import *
 import requests
-import json
 
 
 class SkyBlock:
@@ -40,7 +39,7 @@ class SkyBlock:
         # in the case we dont want to retrieve the info from the cache
         # we request new information
         params = {method: method_key, "key": self.api_key}
-        results = json.loads(requests.get(self.url + _type, params=params).content)
+        results = requests.get(self.url + _type, params=params).json()
 
         # if the query results are available
         if results['success']:
@@ -103,7 +102,7 @@ class SkyBlock:
         # in the case we dont want to retrieve the info from the cache
         # we request new information
         params = {"page": page, "key": self.api_key}
-        results = json.loads(requests.get(self.url + "skyblock/auctions", params=params).content)
+        results = requests.get(self.url + "skyblock/auctions", params=params).json()
 
         # if the query results are available
         if results['success']:

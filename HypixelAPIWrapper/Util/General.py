@@ -1,4 +1,4 @@
-from HypixelAPIWrapper.HelperFunctions import *
+from HypixelAPIWrapper.Util.HelperFunctions import *
 import requests
 import json
 

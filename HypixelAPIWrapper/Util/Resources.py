@@ -1,6 +1,5 @@
-from HypixelAPIWrapper.HelperFunctions import *
+from HypixelAPIWrapper.Util.HelperFunctions import *
 import requests
-import json
 
 
 class Resources:
@@ -40,7 +39,7 @@ class Resources:
         # in the case we dont want to retrieve the info from the cache
         # we request new information
         params = {"uuid": uuid, "key": self.api_key}
-        results = json.loads(requests.get(self.url + _type, params=params).content)
+        results = requests.get(self.url + _type, params=params).json()
 
         # if the query results are available
         if results['success']:

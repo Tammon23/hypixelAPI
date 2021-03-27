@@ -1,6 +1,22 @@
+from HypixelAPIWrapper.Util.Exceptions import UnknownUsernameError
 import requests
 import json
+
+
 apikey = ""
+
+
+# TODO implement function to convert skywars exp into a level
+# TODO implement function to convert network exp into a level
+
+def is_api_key_valid(key):
+    """
+    Checks if the api key is valid or not
+    :return:
+    """
+    params = {"key": key}
+    r = requests.get(f"https://api.hypixel.net/key", params=params).json()
+    return r['success']
 
 
 def get_api_key_info(key):
@@ -9,8 +25,7 @@ def get_api_key_info(key):
     :return:
     """
     params = {"key": key}
-    r = requests.get(f"https://api.hypixel.net/key", params=params)
-    r = json.loads(r.content)
+    r = requests.get(f"https://api.hypixel.net/key", params=params).json()
     if r['success']:
         return r['record']
     return None
@@ -36,9 +51,12 @@ def username_to_uuid(username):
     """
     r = requests.get("https://api.mojang.com/users/profiles/minecraft/" + username)
     if r.status_code != 200:
-        return None
+        raise UnknownUsernameError
     return json.loads(r.content)['id']
 
 
 if __name__ == "__main__":
-    print(get_api_key_info(apikey))
+    import os
+    apikey = os.getenv('HYPIXEL_API_KEY')
+    # print(get_api_key_info(apikey))
+    print(username_to_uuid("Tammon"))
