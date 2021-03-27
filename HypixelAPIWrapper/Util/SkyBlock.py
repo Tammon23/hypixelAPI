@@ -9,7 +9,6 @@ class SkyBlock:
         self.url = "https://api.hypixel.net/"
         self.cached_data = {}
         self.cached_uuid = None
-        self.cached_type = None
 
     def isDataAlreadyCached(self, uuid, _type):
         """ Returns if data is already cached for user """
@@ -58,7 +57,7 @@ class SkyBlock:
                 if not return_result_if_cached:
                     return None
             return results
-        return results['cause']
+        return results['cause'] if "cause" in results else None
 
     def get_collections(self, uuid, cache_results=False, return_result_if_cached=False, get_from_cache=False):
         return self.get_template("resources/skyblock/collections", uuid, cache_results, return_result_if_cached,
@@ -127,7 +126,7 @@ class SkyBlock:
                 if not return_result_if_cached:
                     return None
             return results
-        return results['cause']
+        return results['cause'] if "cause" in results else None
 
     def get_auctions_ended(self, cache_results=False, return_result_if_cached=False, get_from_cache=False):
         return self.get_template("skyblock/auctions_ended", cache_results, return_result_if_cached, get_from_cache)

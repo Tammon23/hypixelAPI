@@ -53,7 +53,7 @@ class Resources:
                 if not return_result_if_cached:
                     return None
             return results
-        return None
+        return results['cause'] if "cause" in results else None
 
     def get_achievements(self, uuid, cache_results=False, return_result_if_cached=False, get_from_cache=False):
         return self.get_template("achievements", uuid, cache_results, return_result_if_cached, get_from_cache)
