@@ -1,3 +1,4 @@
+from HypixelAPIWrapper.Util.Exceptions import InvalidAPIKeyError
 from HypixelAPIWrapper.Util.HelperFunctions import *
 import requests
 
@@ -14,9 +15,11 @@ class SkyBlock:
         """ Returns if data is already cached for user """
         return self.cached_uuid == uuid and _type in self.cached_data, "No cached results for user available"
 
-    def get_template(self, _type, method_key=None, cache_results=False, return_result_if_cached=False, get_from_cache=False, method="uuid"):
+    def get_template(self, _type, method_key=None, cache_results=False, return_result_if_cached=False,
+                     get_from_cache=False, method="uuid"):
         """
         a template function used to get the given information completed for a given uuid, and their points
+        :param method:
         :param _type:
         :param get_from_cache:
         :param method_key:
@@ -24,6 +27,9 @@ class SkyBlock:
         :param return_result_if_cached:
         :return:
         """
+
+        if not is_api_key_valid(self.api_key):
+            raise InvalidAPIKeyError
 
         # if we want to retrieve the info from the cache
         if get_from_cache:
@@ -42,8 +48,8 @@ class SkyBlock:
         results = requests.get(self.url + _type, params=params).json()
 
         # if the query results are available
+        print(results)
         if results['success']:
-
             # remove the column we do not need
             del results['success']
             if cache_results:
@@ -52,18 +58,21 @@ class SkyBlock:
                 if not return_result_if_cached:
                     return None
             return results
-        return None
+        return results['cause']
 
     def get_collections(self, uuid, cache_results=False, return_result_if_cached=False, get_from_cache=False):
-        return self.get_template("resources/skyblock/collections", uuid, cache_results, return_result_if_cached, get_from_cache)
+        return self.get_template("resources/skyblock/collections", uuid, cache_results, return_result_if_cached,
+                                 get_from_cache)
 
     def get_skills(self, uuid, cache_results=False, return_result_if_cached=False, get_from_cache=False):
-        return self.get_template("resources/skyblock/skills", uuid, cache_results, return_result_if_cached, get_from_cache)
+        return self.get_template("resources/skyblock/skills", uuid, cache_results, return_result_if_cached,
+                                 get_from_cache)
 
     def get_news(self, cache_results=False, return_result_if_cached=False, get_from_cache=False):
         return self.get_template("skyblock/news", cache_results, return_result_if_cached, get_from_cache)
 
-    def get_auction(self, method_key, method="uuid", cache_results=False, return_result_if_cached=False, get_from_cache=False):
+    def get_auction(self, method_key, method="uuid", cache_results=False, return_result_if_cached=False,
+                    get_from_cache=False):
         """
         Gets all auction items of a particular player or profile
         :param method_key: the uuid, player name or profile name of the auctioneer
@@ -75,7 +84,8 @@ class SkyBlock:
         """
         if method != "uuid" and method != "player" and method != "profile":
             raise Exception("Available methods are uuid, player, profile!")
-        return self.get_template("skyblock/auction", method_key, cache_results, return_result_if_cached, get_from_cache, method)
+        return self.get_template("skyblock/auction", method_key, cache_results, return_result_if_cached, get_from_cache,
+                                 method)
 
     def get_auctions(self, page, cache_results=False, return_result_if_cached=False, get_from_cache=False):
         """
@@ -86,6 +96,9 @@ class SkyBlock:
         :param get_from_cache:
         :return:
         """
+
+        if is_api_key_valid(self.api_key):
+            raise InvalidAPIKeyError
 
         # if we want to retrieve the info from the cache
         if get_from_cache:
@@ -114,7 +127,7 @@ class SkyBlock:
                 if not return_result_if_cached:
                     return None
             return results
-        return None
+        return results['cause']
 
     def get_auctions_ended(self, cache_results=False, return_result_if_cached=False, get_from_cache=False):
         return self.get_template("skyblock/auctions_ended", cache_results, return_result_if_cached, get_from_cache)
@@ -139,9 +152,12 @@ class SkyBlock:
         return self.get_template("skyblock/bazaar", cache_results, return_result_if_cached, get_from_cache)
 
     def get_profile_by_uuid(self, uuid, cache_results=False, return_result_if_cached=False, get_from_cache=False):
-        return self.get_template("skyblock/profile", cache_results, return_result_if_cached, get_from_cache)
+        return self.get_template("skyblock/profile", uuid, cache_results, return_result_if_cached, get_from_cache)
+
+    def get_profile_by_player(self, uuid, cache_results=False, return_result_if_cached=False, get_from_cache=False):
+        return self.get_template("skyblock/profiles", uuid, cache_results, return_result_if_cached, get_from_cache)
 
 
 if __name__ == "__main__":
     h = SkyBlock(apikey)
-    print(h.get_auctions(1).keys())
+    print(h.get_profile_by_player(username_to_uuid("Tammon")))
