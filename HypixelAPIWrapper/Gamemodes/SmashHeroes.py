@@ -1,6 +1,6 @@
 from HypixelAPIWrapper.Util import Player
 from enum import Enum
-from HypixelAPIWrapper.Gamemodes._SmashHeroesUtil import *
+from HypixelAPIWrapper.Util._SmashHeroesUtil import *
 
 
 class Heroes(Enum):
