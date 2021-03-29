@@ -222,7 +222,9 @@ class Player:
 
         if data is not None:
             if game_mode_id is not None:
-                return data['player']['stats'][game_mode_id]
+                if game_mode_id not in data['stats']:
+                    return None
+                return data['stats'][game_mode_id]
             return data['stats']
         return None
 
@@ -1600,7 +1602,7 @@ class Player:
 
 if __name__ == '__main__':
     # example usage
-    apikey = ""
+    # apikey = ""
     UUID = username_to_uuid("Tammon")
     h = Player(apikey)
 
