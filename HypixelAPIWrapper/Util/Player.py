@@ -9,72 +9,39 @@ class Player:
     def __init__(self, api_key):
         self.api_key = api_key
         self.url = "https://api.hypixel.net/player"
-        self.cached_data = None
-        self.cached_uuid = None
 
-    def isDataAlreadyCached(self, uuid):
-        """ Returns if data is already cached for user """
-        return self.cached_data is not None and self.cached_uuid == uuid, "No cached results for user available"
+    def template(self, request_type, uuid):
+        """ A template function to retrieve data of type request_type"""
 
-    def get_player_data(self, uuid, cache_results=False, return_result_if_cached=False):
-        """
-        Gets all the data of a user, optionally can cache the results and not return the results
-        caching results overwrites already cached attributes
-        :param return_result_if_cached:
-        :param cache_results:
-        :param uuid:
-        :return:
-        """
+        data = self.get_player_data(uuid)
+
+        if data is not None:
+            return data[request_type]
+        return None
+
+    def get_player_data(self, uuid):
+        """ Gets all the data of a user, optionally can cache the results and not return the results
+        caching results overwrites already cached attributes """
+
         if not is_api_key_valid(self.api_key):
             raise InvalidAPIKeyError
 
         params = {"uuid": uuid, "key": self.api_key}
         r = requests.get(self.url, params=params).json()
         if r['success']:
-            if cache_results:
-                self.cached_uuid = uuid
-                self.cached_data = r['player']
-                if not return_result_if_cached:
-                    return None
             return r['player']
-        return None
+        return r['cause'] if "cause" in r else None
 
-    def get_player_name(self, uuid, get_from_cache=False):
-        """
-        Gets the player name of a user (uuid -> player name)
-        :param get_from_cache:
-        :param uuid:
-        :return:
-        """
-        if get_from_cache:
-            data = self.cached_data
-        else:
-            data = self.get_player_data(uuid)
+    def get_player_name(self, uuid):
+        """ Gets the player name of a user (uuid -> player name) """
 
-        if data is not None:
-            return data['playername']
-        return None
+        return self.template("playername", uuid)
 
-    def get_firstLogin(self, uuid, get_from_cache=False):
-        """
-        Gets the first Hypixel logon time
-        :param get_from_cache:
-        :param uuid:
-        :return:
-        """
-        if get_from_cache:
-            state, msg = self.isDataAlreadyCached(uuid)
-            if state:
-                data = self.cached_data
-            else:
-                print(msg)
-                return
-        else:
-            data = self.get_player_data(uuid)
+    def get_firstLogin(self, uuid):
+        """ Gets the first Hypixel logon time """
 
-        if data is not None:
-            return data['firstLogin']
-        return None
+        return self.template("firstLogin", uuid)
+
 
     def get_lastLogin(self, uuid, get_from_cache=False):
         """
