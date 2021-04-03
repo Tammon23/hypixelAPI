@@ -2,8 +2,9 @@ from HypixelAPIWrapper.Util.Exceptions import UnknownUsernameError
 import requests
 import json
 
+import os
 
-apikey = ""
+apikey = os.getenv('HYPIXEL_API_KEY')
 
 
 # TODO implement function to convert skywars exp into a level
@@ -56,7 +57,5 @@ def username_to_uuid(username):
 
 
 if __name__ == "__main__":
-    import os
-    apikey = os.getenv('HYPIXEL_API_KEY')
-    # print(get_api_key_info(apikey))
+    print(get_api_key_info(apikey))
     print(username_to_uuid("Tammon"))

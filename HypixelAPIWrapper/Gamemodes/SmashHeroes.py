@@ -1,25 +1,5 @@
 from HypixelAPIWrapper.Util import Player
-from enum import Enum
 from HypixelAPIWrapper.Util._SmashHeroesUtil import *
-
-
-class Heroes(Enum):
-    BULK = "THE_BULK"
-    GENERAL_CLUCK = "GENERAL_CLUCK"
-    CAKE_MONSTER = "CAKE_MONSTER"
-    BOTMON = "BOTMUN"
-    TINMAN = "TINMAN"
-    SERGEANT_SHIELD = "SERGEANT_SHIELD"
-    CRYOMANCER = "FROSTY"
-    SKULLFIRE = "SKULLFIRE"
-    SANIC = "SANIC"
-    KARAKOT = "GOKU"
-    PUG = "PUG"
-    SPODERMAN = "SPODERMAN"
-    MARAUDER = "MARAUDER"
-    SHOOP = "SHOOP_DA_WHOOP"
-    GREEN_HOOD = "GREEN_HOOD"
-    VOID_CRAWLER = "DUSK_CRAWLER"
 
 
 class SmashHeroes:
@@ -46,201 +26,201 @@ class SmashHeroes:
     def get_play_command_friends():
         return "/play super_smash_friends_normal"
 
-    def get_stats(self, uuid, get_from_cache=False):
-        stats = self.player.get_stats(uuid, get_from_cache, self.gamemode_name)
+    def get_stats(self, uuid):
+        stats = self.player.get_stats(uuid, self.gamemode_name)
 
         return stats
 
-    def template(self, uuid, get_from_cache, attribute_id):
+    def template(self, uuid, attribute_id):
         """ A template function """
-        stats = self.get_stats(uuid, get_from_cache)
+        stats = self.get_stats(uuid)
         if attribute_id not in stats:
             return None
 
         return stats[attribute_id]
 
-    def get_smash_level(self, uuid, get_from_cache=False):
+    def get_smash_level(self, uuid):
         """ Returns the smash level of a user (the sum of all levels of each hero) """
 
-        return self.template(uuid, get_from_cache, "smashLevel")
+        return self.template(uuid, "smashLevel")
 
-    def get_active_class(self, uuid, get_from_cache=False):
+    def get_active_class(self, uuid):
         """ Returns the currently selected class of the user """
 
-        return self.template(uuid, get_from_cache, "active_class")
+        return self.template(uuid, "active_class")
 
-    def get_winstreak_overall(self, uuid, get_from_cache=False):
+    def get_winstreak_overall(self, uuid):
         """ Returns the current winstreak considering all gamemodes """
 
-        return self.template(uuid, get_from_cache, "win_streak")
+        return self.template(uuid, "win_streak")
 
-    def get_deaths_overall(self, uuid, get_from_cache=False):
+    def get_deaths_overall(self, uuid):
         """ Returns the number of overall deaths """
 
-        return self.template(uuid, get_from_cache, "deaths")
+        return self.template(uuid, "deaths")
 
-    def get_deaths_1v1v1v1(self, uuid, get_from_cache=False):
+    def get_deaths_1v1v1v1(self, uuid):
         """ Returns the number of 1v1v1v1 deaths """
 
-        return self.template(uuid, get_from_cache, "deaths_normal")
+        return self.template(uuid, "deaths_normal")
 
-    def get_deaths_2v2(self, uuid, get_from_cache=False):
+    def get_deaths_2v2(self, uuid):
         """ Returns the number of 2v2 deaths """
 
-        return self.template(uuid, get_from_cache, "deaths_2v2")
+        return self.template(uuid, "deaths_2v2")
 
-    def get_deaths_2v2v2(self, uuid, get_from_cache=False):
+    def get_deaths_2v2v2(self, uuid):
         """ Returns the number of 2v2 deaths """
 
-        return self.template(uuid, get_from_cache, "deaths_teams")
+        return self.template(uuid, "deaths_teams")
 
-    def get_kills_overall(self, uuid, get_from_cache=False):
+    def get_kills_overall(self, uuid):
         """ Returns the number of overall kills """
 
-        return self.template(uuid, get_from_cache, "kills")
+        return self.template(uuid, "kills")
 
-    def get_kills_1v1v1v1(self, uuid, get_from_cache=False):
+    def get_kills_1v1v1v1(self, uuid):
         """ Returns the number of 1v1v1v1 kills """
 
-        return self.template(uuid, get_from_cache, "kills_normal")
+        return self.template(uuid, "kills_normal")
 
-    def get_kills_2v2(self, uuid, get_from_cache=False):
+    def get_kills_2v2(self, uuid):
         """ Returns the number of 2v2 kills """
 
-        return self.template(uuid, get_from_cache, "kills_2v2")
+        return self.template(uuid, "kills_2v2")
 
-    def get_kills_2v2v2(self, uuid, get_from_cache=False):
+    def get_kills_2v2v2(self, uuid):
         """ Returns the number of 2v2v2 kills """
 
-        return self.template(uuid, get_from_cache, "kills_teams")
+        return self.template(uuid, "kills_teams")
 
-    def get_losses_overall(self, uuid, get_from_cache=False):
+    def get_losses_overall(self, uuid):
         """ Returns the number of overall losses """
 
-        return self.template(uuid, get_from_cache, "losses")
+        return self.template(uuid, "losses")
 
-    def get_losses_1v1v1v1(self, uuid, get_from_cache=False):
+    def get_losses_1v1v1v1(self, uuid):
         """ Returns the number of 1v1v1v1 losses """
 
-        return self.template(uuid, get_from_cache, "losses_normal")
+        return self.template(uuid, "losses_normal")
 
-    def get_losses_2v2(self, uuid, get_from_cache=False):
+    def get_losses_2v2(self, uuid):
         """ Returns the number of 2v2 losses """
 
-        return self.template(uuid, get_from_cache, "losses_2v2")
+        return self.template(uuid, "losses_2v2")
 
-    def get_losses_2v2v2(self, uuid, get_from_cache=False):
+    def get_losses_2v2v2(self, uuid):
         """ Returns the number of 2v2v2 losses """
 
-        return self.template(uuid, get_from_cache, "losses_teams")
+        return self.template(uuid, "losses_teams")
 
-    def get_wins_overall(self, uuid, get_from_cache=False):
+    def get_wins_overall(self, uuid):
         """ Returns the number of overall wins """
 
-        return self.template(uuid, get_from_cache, "wins")
+        return self.template(uuid, "wins")
 
-    def get_wins_1v1v1v1(self, uuid, get_from_cache=False):
+    def get_wins_1v1v1v1(self, uuid):
         """ Returns the number of 1v1v1v1 wins """
 
-        return self.template(uuid, get_from_cache, "wins_normal")
+        return self.template(uuid, "wins_normal")
 
-    def get_wins_2v2(self, uuid, get_from_cache=False):
+    def get_wins_2v2(self, uuid):
         """ Returns the number of 2v2 wins """
 
-        return self.template(uuid, get_from_cache, "wins_2v2")
+        return self.template(uuid, "wins_2v2")
 
-    def get_wins_2v2v2(self, uuid, get_from_cache=False):
+    def get_wins_2v2v2(self, uuid):
         """ Returns the number of 2v2v2 wins """
 
-        return self.template(uuid, get_from_cache, "wins_teams")
+        return self.template(uuid, "wins_teams")
 
-    def get_coins(self, uuid, get_from_cache=False):
+    def get_coins(self, uuid):
         """ Returns the number of coins """
 
-        return self.template(uuid, get_from_cache, "coins")
+        return self.template(uuid, "coins")
 
-    def get_quits(self, uuid, get_from_cache=False):
+    def get_quits(self, uuid):
         """ Returns the number of quits """
 
-        return self.template(uuid, get_from_cache, "quits")
+        return self.template(uuid, "quits")
 
-    def get_games_overall(self, uuid, get_from_cache=False):
+    def get_games_overall(self, uuid):
         """ Returns the number of overall games played
             (might also include friends mode and 1v1 mode) """
 
-        return self.template(uuid, get_from_cache, "games")
+        return self.template(uuid, "games")
 
-    def get_games_1v1v1v1(self, uuid, get_from_cache=False):
+    def get_games_1v1v1v1(self, uuid):
         """ Returns the number of 1v1v1v1 games played  """
 
-        return self.template(uuid, get_from_cache, "games_normal")
+        return self.template(uuid, "games_normal")
 
-    def get_games_2v2(self, uuid, get_from_cache=False):
+    def get_games_2v2(self, uuid):
         """ Returns the number of 2v2 games played  """
 
-        return self.template(uuid, get_from_cache, "games_2v2")
+        return self.template(uuid, "games_2v2")
 
-    def get_games_2v2v2(self, uuid, get_from_cache=False):
+    def get_games_2v2v2(self, uuid):
         """ Returns the number of 2v2v2 games played  """
 
-        return self.template(uuid, get_from_cache, "games_teams")
+        return self.template(uuid, "games_teams")
 
-    def get_damage_dealt_overall(self, uuid, get_from_cache=False):
+    def get_damage_dealt_overall(self, uuid):
         """ Returns the damage dealt overall """
 
-        return self.template(uuid, get_from_cache, "damage_dealt")
+        return self.template(uuid, "damage_dealt")
 
-    def get_damage_dealt_2v2(self, uuid, get_from_cache=False):
+    def get_damage_dealt_2v2(self, uuid):
         """ Returns the damage dealt in 2v2 """
 
-        return self.template(uuid, get_from_cache, "damage_dealt_2v2")
+        return self.template(uuid, "damage_dealt_2v2")
 
-    def get_damage_dealt_1v1v1v1(self, uuid, get_from_cache=False):
+    def get_damage_dealt_1v1v1v1(self, uuid):
         """ Returns the damage dealt in 1v1v1v1 """
 
-        return self.template(uuid, get_from_cache, "damage_dealt_normal")
+        return self.template(uuid, "damage_dealt_normal")
 
-    def get_hero_xp(self, uuid, hero, get_from_cache=False):
+    def get_hero_xp(self, uuid, hero):
         """ Returns the xp of a provided hero """
 
-        return self.template(uuid, get_from_cache, "xp_" + hero)
+        return self.template(uuid, "xp_" + hero)
 
-    def get_hero_prestige(self, uuid, hero, get_from_cache=False):
+    def get_hero_prestige(self, uuid, hero):
         """ Returns the prestige level of a provided hero """
 
-        return self.template(uuid, get_from_cache, "pg_" + hero)
+        return self.template(uuid, "pg_" + hero)
 
-    def get_hero_level(self, uuid, hero, get_from_cache=False):
+    def get_hero_level(self, uuid, hero):
         """ Returns the level of a provided hero """
 
-        return self.template(uuid, get_from_cache, "lastLevel_" + hero)
+        return self.template(uuid, "lastLevel_" + hero)
 
-    def is_hero_masterskin_enabled(self, uuid, hero, get_from_cache=False):
+    def is_hero_masterskin_enabled(self, uuid, hero):
         """ Checks to see if a hero has their masterskin enabled """
 
-        return self.template(uuid, get_from_cache, "masterArmor_" + hero)
+        return self.template(uuid, "masterArmor_" + hero)
 
-    def get_number_of_10_plays_exp_boosters_bought(self, uuid, get_from_cache=False):
+    def get_number_of_10_plays_exp_boosters_bought(self, uuid):
         """ Returns the number of 10 plays exp booster purchased """
 
-        return self.template(uuid, get_from_cache, "expBooster_purchases_10_plays")
+        return self.template(uuid, "expBooster_purchases_10_plays")
 
-    def get_number_of_30_plays_exp_boosters_bought(self, uuid, get_from_cache=False):
+    def get_number_of_30_plays_exp_boosters_bought(self, uuid):
         """ Returns the number of 30 plays exp booster purchased """
 
-        return self.template(uuid, get_from_cache, "expBooster_purchases_30_plays")
+        return self.template(uuid, "expBooster_purchases_30_plays")
 
-    def get_number_of_50_plays_exp_boosters_bought(self, uuid, get_from_cache=False):
+    def get_number_of_50_plays_exp_boosters_bought(self, uuid):
         """ Returns the number of 50 plays exp booster purchased """
 
-        return self.template(uuid, get_from_cache, "expBooster_purchases_50_plays")
+        return self.template(uuid, "expBooster_purchases_50_plays")
 
-    def get_number_of_100_plays_exp_boosters_bought(self, uuid, get_from_cache=False):
+    def get_number_of_100_plays_exp_boosters_bought(self, uuid):
         """ Returns the number of 100 plays exp booster purchased """
 
-        return self.template(uuid, get_from_cache, "expBooster_purchases_100_plays")
+        return self.template(uuid, "expBooster_purchases_100_plays")
 
-    def get_hero(self, uuid, hero, get_from_cache=False):
+    def get_hero(self, uuid, hero):
         """ Returns the hero class associated to the provided hero """
 
         # I can't wait for case statements in python (3.10)
@@ -290,7 +270,7 @@ class SmashHeroes:
             return GreenHood(self.api_key, uuid)
 
         elif hero == Heroes.VOID_CRAWLER:
-            return VoidCrawler(self.api_key, uuid)
+            return VoidCrawler(self, self.api_key, uuid)
 
         else:
             return None
