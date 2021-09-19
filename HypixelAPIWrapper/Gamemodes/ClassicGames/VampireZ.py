@@ -1,2 +1,0 @@
-class VampireZ:
-    pass
