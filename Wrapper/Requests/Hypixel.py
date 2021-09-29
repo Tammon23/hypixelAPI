@@ -3,10 +3,11 @@ from typing import Optional, Any, Tuple
 import requests
 
 from ..Exceptions.API import InvalidAPIException, APIException
-from ..Hypixel.General.Leaderboards import Leaderboards
-from ..Hypixel.General.PlayerCounts import PlayerCounts
 from ..Hypixel.General.APIKey import APIKey
 from ..Hypixel.General.Boosters import Boosters
+from ..Hypixel.General.Leaderboards import Leaderboards
+from ..Hypixel.General.PlayerCounts import PlayerCounts
+from ..Hypixel.General.PunishmentStatistics import PunishmentStatistics
 
 
 class Hypixel:
@@ -132,3 +133,23 @@ class Hypixel:
             raise APIException(status_code, response["cause"])
 
         return Leaderboards.parse_obj({"leaderboards": response["leaderboards"]})
+
+    def punishmentStatistics(self, api_key: Optional[str] = None) -> PunishmentStatistics:
+        """ Get api key information.
+
+        :param api_key: The API key which information is going to be retrieved from
+        :type api_key: None or str
+        :return: The object containing the information regarding the api key
+        :rtype: APIKey
+        """
+
+        if api_key is not None:
+            status_code, response = self._makeRequest("/punishmentstats", params={"key": api_key})
+
+        else:
+            status_code, response = self._makeRequest("/punishmentstats")
+
+        if status_code != 200:
+            raise APIException(status_code, response["cause"])
+
+        return PunishmentStatistics.parse_obj(response)
