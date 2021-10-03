@@ -1,8 +1,8 @@
 from datetime import datetime
 from typing import List, Union, Dict
+from uuid import UUID
 
 from pydantic import BaseModel, validator, Field
-from uuid import UUID
 
 from ...Constants.General.GameTypes import GameType, GameTypeDict
 
